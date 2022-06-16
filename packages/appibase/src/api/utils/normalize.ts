@@ -2,7 +2,7 @@ import { Product, ProductOption, ProductImage } from '@vercel/commerce/types/pro
 import { Category } from '@vercel/commerce/types/site'
 import { Cart, LineItem } from '@vercel/commerce/types/cart'
 import type { AppibaseProduct, AppibaseCollection, AppibaseCart, AppibasePrice } from '../../types'
-import { CURRENCY } from '../../const'
+// import { CURRENCY } from '../../const'
 
 const NormalizeProduct = (product: AppibaseProduct): Product => {
   const options: ProductOption[] = [];
@@ -18,7 +18,7 @@ const NormalizeProduct = (product: AppibaseProduct): Product => {
   }
 
   // finding the relevant price based on the store's currency
-  const price = product.prices.data.find(p => p.currency === CURRENCY) as AppibasePrice
+  // const price = product.prices.data.find(p => p.currency === CURRENCY) as AppibasePrice
 
   return {
     id: product.id,
@@ -36,7 +36,7 @@ const NormalizeProduct = (product: AppibaseProduct): Product => {
         values: [{ label: o.name || "" }]
       })) || []
     })) || [],
-    price: { value: price.amount.float, currencyCode: price.currency },
+    price: { value: product.prices.data[0].amount.float, currencyCode: product.prices.data[0].currency },
     options
   }
 }

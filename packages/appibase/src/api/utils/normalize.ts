@@ -26,7 +26,7 @@ const NormalizeProduct = (product: AppibaseProduct): Product => {
     description: product.description,
     images: product.image_urls.map(i => <ProductImage> { url: i }),
     sku: product.sku,
-    slug: product.sku,
+    slug: product.slug,
     variants: product.children?.data?.map(p => ({
       id: p.id,
       options: p.variation_options?.data.map(o => ({
